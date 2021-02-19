@@ -1,4 +1,0 @@
-client/typeCorrectTest.java
- client.typeCorrectTest
-client/JsonReaderTest.java
- client.JsonReaderTest
