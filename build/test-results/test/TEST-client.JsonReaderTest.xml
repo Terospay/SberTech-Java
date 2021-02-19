@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="client.JsonReaderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-02-19T13:58:18" hostname="LAPTOP-IPD9UCU2" time="0.035">
+  <properties/>
+  <testcase name="jsonRead()" classname="client.JsonReaderTest" time="0.035"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
