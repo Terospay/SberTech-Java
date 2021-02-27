@@ -3,12 +3,12 @@ package garage;
 import java.util.*;
 
 public class Garage implements GarageInterface {
-    private ArrayList<Car> cars;
-    private ArrayList<Owner> owners;
-    private ArrayList<String> brands;
-    private HashMap<String, ArrayList<Car>> brandToCars;
-    private HashMap<Owner, ArrayList<Car>> ownerToCars;
-    private HashMap<String, ArrayList<Owner>> brandToOwners;
+    private final ArrayList<Car> cars;
+    private final ArrayList<Owner> owners;
+    private final ArrayList<String> brands;
+    private final HashMap<String, ArrayList<Car>> brandToCars;
+    private final HashMap<Owner, ArrayList<Car>> ownerToCars;
+    private final HashMap<String, ArrayList<Owner>> brandToOwners;
 
     Garage() {
         cars = new ArrayList<Car>();
@@ -127,7 +127,7 @@ public class Garage implements GarageInterface {
         boolean carExist = false;
         boolean brandExist = false;
         for (Car c : cars) {
-            if(c.equals(cars)) {
+            if(c.equals(car)) {
                 carExist = true;
                 break;
             }
