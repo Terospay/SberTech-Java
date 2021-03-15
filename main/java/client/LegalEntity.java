@@ -1,10 +1,10 @@
 package client;
 
 public class LegalEntity implements Client {
-    public String name;
-    private String inn;
-    public String describing;
-    public boolean isSanctioned;
+    private final String name;
+    private final String inn;
+    private final String describing;
+    private final boolean isSanctioned;
 
     LegalEntity(String name, String inn, String describing, boolean isSanctioned) {
         this.name = name;
@@ -13,5 +13,7 @@ public class LegalEntity implements Client {
         this.isSanctioned = isSanctioned;
     }
 
-    public String info() { return name + " " + inn + " " + describing; }
+    public String info() {
+        return name + " " + inn + " " + describing;
+    }
 }

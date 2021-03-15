@@ -1,12 +1,14 @@
 package client;
 
-import org.json.simple.*;
-import org.json.simple.parser.*;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
-import java.io.*;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class JsonReader {
-    public static Object jsonRead(String path) throws IOException, ParseException {
+    public static Client jsonRead(String path) throws IOException, ParseException {
         Object obj = new JSONParser().parse(new FileReader(path));
         JSONObject jo = (JSONObject) obj;
         String name = (String) jo.get("name");
