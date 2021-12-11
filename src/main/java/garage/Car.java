@@ -1,5 +1,6 @@
 package garage;
 
+
 public class Car {
     private final int carId;
     private final String brand;
