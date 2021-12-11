@@ -1,10 +1,13 @@
 package garage;
 
-import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import java.util.*;
 
-class GarageTest {
+public class GarageTest {
 
     private static final Owner o1 = new Owner("Alex", "Ivanov", 20, 0);
     private static final Owner o2 = new Owner("Alex", "Ivanov", 30, 1);
@@ -13,10 +16,10 @@ class GarageTest {
     private static final Car c2 = new Car(1, "Porsche", "Panamera", 300, 500, 1);
     private static final Car c3 = new Car(2, "Ferrari", "Roma", 200, 350, 2);
     private static final Car c4 = new Car(3, "Ferrari", "FF", 350, 480, 1);
-    private static Garage garage  =new Garage();
+    private static Garage garage = new Garage();
 
-    @BeforeAll
-    static void init() {
+    @BeforeClass
+    public static void init() {
         garage.addNewCar(c1, o1);
         garage.addNewCar(c2, o2);
         garage.addNewCar(c3, o3);
@@ -24,48 +27,48 @@ class GarageTest {
     }
 
     @Test
-    void allCarsUniqueOwners() {
-        List<Owner> expected =  new ArrayList<Owner>(Arrays.asList(o1,o2, o3));
+    public void allCarsUniqueOwners() {
+        List<Owner> expected = new ArrayList<Owner>(Arrays.asList(o1, o2, o3));
         assertEquals(garage.allCarsUniqueOwners(), expected);
     }
 
     @Test
-    void topThreeCarsByMaxVelocity() {
+    public void topThreeCarsByMaxVelocity() {
         List<Car> expected = new ArrayList<Car>(Arrays.asList(c4, c2, c1));
         assertEquals(garage.topThreeCarsByMaxVelocity(), expected);
 
     }
 
     @Test
-    void allCarsOfBrand() {
-        List<Car> expected= new ArrayList<Car>(Arrays.asList(c3, c4));
+    public void allCarsOfBrand() {
+        List<Car> expected = new ArrayList<Car>(Arrays.asList(c3, c4));
         assertEquals(garage.allCarsOfBrand("Ferrari"), expected);
     }
 
     @Test
-    void carsWithPowerMoreThan() {
+    public void carsWithPowerMoreThan() {
         List<Car> expected = new ArrayList<Car>(Arrays.asList(c2, c4));
         assertEquals(garage.carsWithPowerMoreThan(400), expected);
     }
 
     @Test
-    void allCarsOfOwner() {
+    public void allCarsOfOwner() {
         List<Car> expected = new ArrayList<Car>(Arrays.asList(c2, c4));
         assertEquals(garage.allCarsOfOwner(o2), expected);
     }
 
     @Test
-    void meanOwnersAgeOfCarBrand() {
+    public void meanOwnersAgeOfCarBrand() {
         assertEquals(35, garage.meanOwnersAgeOfCarBrand("Ferrari"));
     }
 
     @Test
-    void meanCarNumberForEachOwner() {
+    public void meanCarNumberForEachOwner() {
         assertEquals(4, garage.meanCarNumberForEachOwner());
     }
 
     @Test
-    void removeCar() {
+    public void removeCar() {
         assertEquals(c1, garage.removeCar(0));
     }
 
