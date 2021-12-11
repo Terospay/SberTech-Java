@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: Create Dir
+      file:
+        path: /home/mftiedu/vl_vlasov
+        state: directory
+
+    - name: Copy Jar
+      copy:
+        src: target/jenkins_sonar-1.0-SNAPSHOT.jar
+        dest: /home/mftiedu/vl_vlasov
+
+...
