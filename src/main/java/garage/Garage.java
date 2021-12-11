@@ -15,7 +15,7 @@ public class Garage implements GarageInterface {
         owners = new ArrayList<Owner>();
         brands = new ArrayList<String>();
         brandToCars = new HashMap<String, ArrayList<Car>>();
-        ownerToCars  =new HashMap<Owner, ArrayList<Car>>();
+        ownerToCars = new HashMap<Owner, ArrayList<Car>>();
         brandToOwners = new HashMap<String, ArrayList<Owner>>();
     }
 
@@ -109,15 +109,17 @@ public class Garage implements GarageInterface {
                 break;
             }
         }
-        cars.remove(removable);
-        brandToCars.get(removable.getBrand()).remove(removable);
-        Owner ownerThisCar = null;
-        for (Owner o : owners) {
-            if (o.getOwnerId() == removable.getOwnerId()) {
-                ownerThisCar = o;
+        if (removable != null) {
+            cars.remove(removable);
+            brandToCars.get(removable.getBrand()).remove(removable);
+            Owner ownerThisCar = null;
+            for (Owner o : owners) {
+                if (o.getOwnerId() == removable.getOwnerId()) {
+                    ownerThisCar = o;
+                }
             }
+            ownerToCars.get(ownerThisCar).remove(removable);
         }
-        ownerToCars.get(ownerThisCar).remove(removable);
         return removable;
     }
 
@@ -127,23 +129,23 @@ public class Garage implements GarageInterface {
         boolean carExist = false;
         boolean brandExist = false;
         for (Car c : cars) {
-            if(c.equals(car)) {
+            if (c.equals(car)) {
                 carExist = true;
                 break;
             }
-            if(c.getBrand().equals(car.getBrand())) {
+            if (c.getBrand().equals(car.getBrand())) {
                 brandExist = true;
                 break;
             }
         }
 
-        if(!brandExist) {
+        if (!brandExist) {
             brands.add(car.getBrand());
             brandToOwners.put(car.getBrand(), new ArrayList<Owner>());
             brandToCars.put(car.getBrand(), new ArrayList<Car>());
         }
-        for(Owner o : owners) {
-            if(o.equals(owner)) {
+        for (Owner o : owners) {
+            if (o.equals(owner)) {
                 ownerExist = true;
                 break;
             }
@@ -152,13 +154,13 @@ public class Garage implements GarageInterface {
             owners.add(owner);
             ownerToCars.put(owner, new ArrayList<Car>());
         }
-        if(!carExist) {
+        if (!carExist) {
             cars.add(car);
             ownerToCars.get(owner).add(car);
             brandToCars.get(car.getBrand()).add(car);
         }
         boolean ownerInBrandExist = false;
-        if(brandExist && ownerExist) {
+        if (brandExist && ownerExist) {
             for (Owner o : brandToOwners.get(car.getBrand())) {
                 if (o.equals(owner)) {
                     ownerInBrandExist = true;
@@ -166,7 +168,7 @@ public class Garage implements GarageInterface {
                 }
             }
         }
-        if(!brandExist || !ownerExist || !ownerInBrandExist) {
+        if (!brandExist || !ownerExist || !ownerInBrandExist) {
             brandToOwners.get(car.getBrand()).add(owner);
         }
     }
