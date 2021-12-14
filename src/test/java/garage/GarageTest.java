@@ -9,13 +9,13 @@ import java.util.*;
 
 public class GarageTest {
 
-    private static final Owner o1 = new Owner("Alex", "Ivanov", 20, 0);
-    private static final Owner o2 = new Owner("Alex", "Ivanov", 30, 1);
-    private static final Owner o3 = new Owner("Alex", "Ivanov", 40, 2);
-    private static final Car c1 = new Car(0, "Toyota", "Camry", 200, 350, 0);
-    private static final Car c2 = new Car(1, "Porsche", "Panamera", 300, 500, 1);
-    private static final Car c3 = new Car(2, "Ferrari", "Roma", 200, 350, 2);
-    private static final Car c4 = new Car(3, "Ferrari", "FF", 350, 480, 1);
+    private static final Owner o1 = new Owner(20, 0);
+    private static final Owner o2 = new Owner(30, 1);
+    private static final Owner o3 = new Owner(40, 2);
+    private static final Car c1 = new Car(0, "Toyota", 200, 350, 0);
+    private static final Car c2 = new Car(1, "Porsche", 300, 500, 1);
+    private static final Car c3 = new Car(2, "Ferrari", 200, 350, 2);
+    private static final Car c4 = new Car(3, "Ferrari", 350, 480, 1);
     private static Garage garage = new Garage();
 
     @BeforeClass

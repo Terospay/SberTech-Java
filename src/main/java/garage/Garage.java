@@ -11,12 +11,12 @@ public class Garage implements GarageInterface {
     private final HashMap<String, ArrayList<Owner>> brandToOwners;
 
     Garage() {
-        cars = new ArrayList<Car>();
-        owners = new ArrayList<Owner>();
+        cars = new ArrayList<>();
+        owners = new ArrayList<>();
         brands = new ArrayList<String>();
-        brandToCars = new HashMap<String, ArrayList<Car>>();
-        ownerToCars = new HashMap<Owner, ArrayList<Car>>();
-        brandToOwners = new HashMap<String, ArrayList<Owner>>();
+        brandToCars = new HashMap<>();
+        ownerToCars = new HashMap<>();
+        brandToOwners = new HashMap<>();
     }
 
 
@@ -27,8 +27,8 @@ public class Garage implements GarageInterface {
 
     @Override
     public Collection<Car> topThreeCarsByMaxVelocity() {
-        List<Integer> pos = new ArrayList<Integer>(Arrays.asList(new Integer[3]));
-        List<Integer> value = new ArrayList<Integer>(Arrays.asList(new Integer[3]));
+        List<Integer> pos = new ArrayList<>(Arrays.asList(new Integer[3]));
+        List<Integer> value = new ArrayList<>(Arrays.asList(new Integer[3]));
         for (int i = 0; i < 3; ++i) {
             pos.set(i, 0);
             value.set(i, -1);
@@ -55,7 +55,7 @@ public class Garage implements GarageInterface {
             }
         }
 
-        List<Car> returnable = new ArrayList<Car>(3);
+        List<Car> returnable = new ArrayList<>(3);
         for (int i = 0; i < 3; ++i) {
             if (value.get(i) != -1) {
                 returnable.add(cars.get(pos.get(i)));
@@ -71,7 +71,7 @@ public class Garage implements GarageInterface {
 
     @Override
     public Collection<Car> carsWithPowerMoreThan(int power) {
-        List<Car> returnable = new ArrayList<Car>();
+        List<Car> returnable = new ArrayList<>();
         for (Car c : cars) {
             if (c.getPower() > power) {
                 returnable.add(c);
@@ -87,12 +87,12 @@ public class Garage implements GarageInterface {
 
     @Override
     public int meanOwnersAgeOfCarBrand(String brand) {
-        int sum_age = 0;
+        int sumAge = 0;
         ArrayList<Owner> ownersForBrand = brandToOwners.get(brand);
         for (Owner owner : ownersForBrand) {
-            sum_age += owner.getAge();
+            sumAge += owner.getAge();
         }
-        return sum_age / ownersForBrand.size();
+        return sumAge / ownersForBrand.size();
     }
 
     @Override
@@ -125,34 +125,18 @@ public class Garage implements GarageInterface {
 
     @Override
     public void addNewCar(Car car, Owner owner) {
-        boolean ownerExist = false;
-        boolean carExist = false;
-        boolean brandExist = false;
-        for (Car c : cars) {
-            if (c.equals(car)) {
-                carExist = true;
-                break;
-            }
-            if (c.getBrand().equals(car.getBrand())) {
-                brandExist = true;
-                break;
-            }
-        }
-
+        boolean[] exist = chechExistence(car, owner);
+        boolean carExist = exist[0];
+        boolean brandExist = exist[1];
+        boolean ownerExist = exist[2];
         if (!brandExist) {
             brands.add(car.getBrand());
-            brandToOwners.put(car.getBrand(), new ArrayList<Owner>());
-            brandToCars.put(car.getBrand(), new ArrayList<Car>());
-        }
-        for (Owner o : owners) {
-            if (o.equals(owner)) {
-                ownerExist = true;
-                break;
-            }
+            brandToOwners.put(car.getBrand(), new ArrayList<>());
+            brandToCars.put(car.getBrand(), new ArrayList<>());
         }
         if (!ownerExist) {
             owners.add(owner);
-            ownerToCars.put(owner, new ArrayList<Car>());
+            ownerToCars.put(owner, new ArrayList<>());
         }
         if (!carExist) {
             cars.add(car);
@@ -171,5 +155,25 @@ public class Garage implements GarageInterface {
         if (!brandExist || !ownerExist || !ownerInBrandExist) {
             brandToOwners.get(car.getBrand()).add(owner);
         }
+    }
+
+    private boolean[] chechExistence(Car car, Owner owner) {
+        boolean[] exist = {false, false, false};
+        for (Car c : cars) {
+            if (c.equals(car)) {
+                exist[0] = true;
+            }
+            if (c.getBrand().equals(car.getBrand())) {
+                exist[1] = true;
+                break;
+            }
+        }
+        for (Owner o : owners) {
+            if (o.equals(owner)) {
+                exist[2] = true;
+                break;
+            }
+        }
+        return exist;
     }
 }
