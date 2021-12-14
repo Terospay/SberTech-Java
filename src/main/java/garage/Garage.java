@@ -13,7 +13,7 @@ public class Garage implements GarageInterface {
     Garage() {
         cars = new ArrayList<>();
         owners = new ArrayList<>();
-        brands = new ArrayList<String>();
+        brands = new ArrayList<>();
         brandToCars = new HashMap<>();
         ownerToCars = new HashMap<>();
         brandToOwners = new HashMap<>();
